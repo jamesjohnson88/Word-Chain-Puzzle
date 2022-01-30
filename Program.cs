@@ -58,37 +58,6 @@ string RecursivelyNavigateChain(string startWord, string targetWord)
     Console.WriteLine("Running...");
     
     var successfulPaths = SolveChain(startWord, endWord);
-    
-    // var initial = GenerateSingleChangeMaps(startWord);
-    //
-    // if (initial.Contains(targetWord))
-    // {
-    //     return startWord + " -> " + targetWord;
-    // }
-    //
-    // foreach (var x in initial)
-    // {
-    //     var matches = GenerateSingleChangeMaps(x);
-    //
-    //     if (matches.Contains(targetWord))
-    //     {
-    //         return startWord + " -> " + x + " -> " + targetWord;
-    //     }
-    //     
-    //     Console.WriteLine(startWord + " -> " +  x + " -> ");
-    //     
-    //     foreach (var y in matches)
-    //     {
-    //         var matches2 = GenerateSingleChangeMaps(y);
-    //
-    //         if (matches2.Contains(targetWord))
-    //         {
-    //             return startWord + " -> " +  x + " -> " + y + " -> " + targetWord;
-    //         }
-    //         
-    //         Console.WriteLine(startWord + " -> " +  x + " -> " + y + " -> ");
-    //     }
-    // }
 
     var closestMatch = successfulPaths
         .OrderBy(x => x.Count)
@@ -126,6 +95,8 @@ void RecursivelySolveChain(string starterWord, string targetWord, ref List<strin
 
     var list = wordTracker;
     var changeMaps = GenerateSingleChangeMaps(starterWord).ToList();
+    
+    // TODO - check maps for target word before bothering to loop through
     
     var validMaps = changeMaps.Where(x => !list.Contains(x)); 
     // TODO - use deviations to reduce number of branches we need to traverse
